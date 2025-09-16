@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversor de Distancias</title>
+  <style>
+    /* 🎨 Fondo animado azul grisáceo */
+    body {
+      background: linear-gradient(45deg, #b0c4de, #8fa6c3, #a1b8d8, #c0d0e0);
+      background-size: 400% 400%;
+      animation: fondoAnimado 12s ease infinite;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    @keyframes fondoAnimado {
+      0%   { background-position: 0% 50%; }
+      25%  { background-position: 50% 100%; }
+      50%  { background-position: 100% 50%; }
+      75%  { background-position: 50% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .container {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background: #ffe4ec; /* 🌸 Cuadrado rosado */
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+      width: 45%;
+      min-width: 280px;
+      animation: bounceIn 0.8s ease forwards;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0px 5px 15px rgba(255, 105, 180, 0.4);
+    }
+
+    input, select, button {
+      padding: 10px;
+      margin-top: 10px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      background-color: #ff80ab;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      flex: 1;
+    }
+
+    button:hover {
+      background-color: #ff4081;
+      transform: scale(1.05);
+    }
+
+    .resultado {
+      font-weight: bold;
+      margin-top: 15px;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.3s ease;
+    }
+
+    .resultado.mostrar {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* 🎞 Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bounceIn {
+      0%   { transform: scale(0.8) translateY(20px); opacity: 0; }
+      60%  { transform: scale(1.05) translateY(-5px); opacity: 1; }
+      80%  { transform: scale(0.97) translateY(2px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 rgba(255, 128, 171, 0.3); }
+      50% { box-shadow: 0 0 15px rgba(255, 128, 171, 0.6); }
+      100% { box-shadow: 0 0 0 rgba(255, 128, 171, 0.3); }
+    }
+
+    .pulse {
+      animation: pulse 0.6s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Conversor de Distancias</h2>
+
+  <div class="container">
+    <!-- CARD 1 -->
+    <div class="card" id="card1">
+      <label for="valor1">Ingresa el valor:</label>
+      <input type="number" id="valor1" placeholder="Ejemplo: 5">
+
+      <label for="unidadEntrada1">Convertir de:</label>
+      <select id="unidadEntrada1">
+        <option value="km">Kilómetros</option>
+        <option value="m">Metros</option>
+        <option value="cm">Centímetros</option>
+        <option value="mi">Millas</option>
+        <option value="ft">Pies</option>
+      </select>
+
+      <label for="unidadSalida1">A:</label>
+      <select id="unidadSalida1">
+        <option value="km">Kilómetros</option>
+        <option value="m">Metros</option>
+        <option value="cm">Centímetros</option>
+        <option value="mi">Millas</option>
+        <option value="ft">Pies</option>
+      </select>
+
+      <div class="btn-row">
+        <button onclick="convertir(1)">Convertir</button>
+        <button onclick="intercambiar(1)">🔄</button>
+      </div>
+      <div class="resultado" id="resultado1"></div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card" id="card2">
+      <label for="valor2">Ingresa el valor:</label>
+      <input type="number" id="valor2" placeholder="Ejemplo: 10">
+
+      <label for="unidadEntrada2">Convertir de:</label>
+      <select id="unidadEntrada2">
+        <option value="km">Kilómetros</option>
+        <option value="m">Metros</option>
+        <option value="cm">Centímetros</option>
+        <option value="mi">Millas</option>
+        <option value="ft">Pies</option>
+      </select>
+
+      <label for="unidadSalida2">A:</label>
+      <select id="unidadSalida2">
+        <option value="km">Kilómetros</option>
+        <option value="m">Metros</option>
+        <option value="cm">Centímetros</option>
+        <option value="mi">Millas</option>
+        <option value="ft">Pies</option>
+      </select>
+
+      <div class="btn-row">
+        <button onclick="convertir(2)">Convertir</button>
+        <button onclick="intercambiar(2)">🔄</button>
+      </div>
+      <div class="resultado" id="resultado2"></div>
+    </div>
+  </div>
+
+  <script>
+    function convertir(cual) {
+      const valor = parseFloat(document.getElementById("valor" + cual).value);
+      const unidadEntrada = document.getElementById("unidadEntrada" + cual).value;
+      const unidadSalida = document.getElementById("unidadSalida" + cual).value;
+      const resultadoDiv = document.getElementById("resultado" + cual);
+      const card = document.getElementById("card" + cual);
+
+      if (isNaN(valor)) {
+        mostrarResultado(resultadoDiv, "⚠️ Ingresa un número válido.");
+        return;
+      }
+
+      // Paso 1: convertir a metros
+      let metros;
+      switch (unidadEntrada) {
+        case "km": metros = valor * 1000; break;
+        case "m": metros = valor; break;
+        case "cm": metros = valor / 100; break;
+        case "mi": metros = valor * 1609.34; break;
+        case "ft": metros = valor * 0.3048; break;
+      }
+
+      // Paso 2: convertir a unidad de salida
+      let resultado;
+      switch (unidadSalida) {
+        case "km": resultado = metros / 1000; break;
+        case "m": resultado = metros; break;
+        case "cm": resultado = metros * 100; break;
+        case "mi": resultado = metros / 1609.34; break;
+        case "ft": resultado = metros / 0.3048; break;
+      }
+
+      mostrarResultado(resultadoDiv, `${valor} ${nombreUnidad(unidadEntrada)} = ${resultado.toFixed(4)} ${nombreUnidad(unidadSalida)}`);
+
+      // Animación de "pulse"
+      card.classList.remove("pulse");
+      void card.offsetWidth; // reinicia animación
+      card.classList.add("pulse");
+    }
+
+    function mostrarResultado(div, texto) {
+      div.innerText = texto;
+      div.classList.remove("mostrar");
+      setTimeout(() => div.classList.add("mostrar"), 10);
+    }
+
+    function nombreUnidad(u) {
+      switch (u) {
+        case "km": return "kilómetros";
+        case "m": return "metros";
+        case "cm": return "centímetros";
+        case "mi": return "millas";
+        case "ft": return "pies";
+      }
+    }
+
+    function intercambiar(cual) {
+      const entrada = document.getElementById("unidadEntrada" + cual);
+      const salida = document.getElementById("unidadSalida" + cual);
+      const temp = entrada.value;
+      entrada.value = salida.value;
+      salida.value = temp;
+    }
+  </script>
+
+</body>
+</html>
